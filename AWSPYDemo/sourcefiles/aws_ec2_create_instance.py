@@ -1,4 +1,4 @@
-# Lets create EC2 instances using Python BOTO3
+# Let's create EC2 instances using Python BOTO3
 import boto3
 
 
@@ -10,14 +10,14 @@ def create_ec2_instance():
     :return: Creates the EC2 instance.
     """
     try:
-        print ("Creating EC2 instance")
+        print("Creating EC2 instance")
         resource_ec2 = boto3.client("ec2")
         resource_ec2.run_instances(
-            ImageId="ami-08e0ca9924195beba",
+            ImageId="ami-06640050dc3f556bb",
             MinCount=1,
             MaxCount=1,
             InstanceType="t2.micro",
-            KeyName="ec2-key"
+            KeyName="ec2"
         )
     except Exception as e:
         print(e)
@@ -25,7 +25,7 @@ def create_ec2_instance():
 
 def describe_ec2_instance():
     try:
-        print ("Describing EC2 instance")
+        print("Describing EC2 instance")
         resource_ec2 = boto3.client("ec2")
         print(resource_ec2.describe_instances()["Reservations"][0]["Instances"][0]["InstanceId"])
         return str(resource_ec2.describe_instances()["Reservations"][0]["Instances"][0]["InstanceId"])
@@ -35,7 +35,7 @@ def describe_ec2_instance():
 
 def reboot_ec2_instance():
     try:
-        print ("Reboot EC2 instance")
+        print("Reboot EC2 instance")
         instance_id = describe_ec2_instance()
         resource_ec2 = boto3.client("ec2")
         print(resource_ec2.reboot_instances(InstanceIds=[instance_id]))
@@ -45,7 +45,7 @@ def reboot_ec2_instance():
 
 def stop_ec2_instance():
     try:
-        print ("Stop EC2 instance")
+        print("Stop EC2 instance")
         instance_id = describe_ec2_instance()
         resource_ec2 = boto3.client("ec2")
         print(resource_ec2.stop_instances(InstanceIds=[instance_id]))
@@ -55,7 +55,7 @@ def stop_ec2_instance():
 
 def start_ec2_instance():
     try:
-        print ("Start EC2 instance")
+        print("Start EC2 instance")
         instance_id = describe_ec2_instance()
         resource_ec2 = boto3.client("ec2")
         print(resource_ec2.start_instances(InstanceIds=[instance_id]))
@@ -65,7 +65,7 @@ def start_ec2_instance():
 
 def terminate_ec2_instance():
     try:
-        print ("Terminate EC2 instance")
+        print("Terminate EC2 instance")
         instance_id = describe_ec2_instance()
         resource_ec2 = boto3.client("ec2")
         print(resource_ec2.terminate_instances(InstanceIds=[instance_id]))
@@ -73,9 +73,9 @@ def terminate_ec2_instance():
         print(e)
 
 
-#create_ec2_instance()
-#describe_ec2_instance()
-#reboot_ec2_instance()
-#stop_ec2_instance()
-#start_ec2_instance()
-#terminate_ec2_instance()
+create_ec2_instance()
+# describe_ec2_instance()
+# reboot_ec2_instance()
+# stop_ec2_instance()
+# start_ec2_instance()
+# terminate_ec2_instance()
